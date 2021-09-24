@@ -6,47 +6,70 @@ let actBtn3 = document.getElementById('ActionButton3');
 let actBtn4 = document.getElementById('ActionButton4');
 let actBtn5 = document.getElementById('ActionButton5');
 let result = 0;
+let naturalNum;
 
-actBtn1.addEventListener('click', sum);
-actBtn2.addEventListener('click', subtraction);
-actBtn3.addEventListener('click', multi);
-actBtn4.addEventListener('click', division);
-actBtn5.addEventListener('click', factorial);
+actBtn1.addEventListener('click', () =>{
+    try {
+        if(inpTxt1.value === "" || inpTxt2.value === "" || inpTxt1.value === "" && inpTxt2.value === "") throw 'Valor(es) vacio(s)';
+        sum(inpTxt1.valueAsNumber, inpTxt2.valueAsNumber);
+    } catch (e) { console.log(e); }
+});
+actBtn2.addEventListener('click', () => {
+    try {
+        if(inpTxt1.value === "" || inpTxt2.value === "" || inpTxt1.value === "" && inpTxt2.value === "") throw 'Valor(es) vacio(s)';
+        subtraction(inpTxt1.valueAsNumber, inpTxt2.valueAsNumber);
+    } catch (e) { console.log(e); }
+});
+actBtn3.addEventListener('click', () => {
+    try {
+        if(inpTxt1.value === "" || inpTxt2.value === "" || inpTxt1.value === "" && inpTxt2.value === "") throw 'Valor(es) vacio(s)';
+        multi(inpTxt1.valueAsNumber, inpTxt2.valueAsNumber);
+    } catch (e) { console.log(e); }
+});
+actBtn4.addEventListener('click', () =>{
+    try {
+        if(inpTxt1.value === "" || inpTxt2.value === "" || inpTxt1.value === "" && inpTxt2.value === "") throw 'Valor(es) vacio(s)';
+        if(inpTxt2.valueAsNumber === 0) throw `You can't divide /0`;
+        division(inpTxt1.valueAsNumber, inpTxt2.valueAsNumber);
+    } catch (e) { console.log(e); }
+});
+actBtn5.addEventListener('click', () =>{
+    try {
+        if(inpTxt1.value === "") throw 'Valor vacio';
+        if(inpTxt1.valueAsNumber >= 22) throw `I can't show an appropiate result, it's very big`;
+        if(inpTxt1.valueAsNumber < 0) throw `undefined`;
+        factorial(inpTxt1.valueAsNumber);
+    } catch (e) { console.log(e); }
+});
 
-function sum(param){
-    param =  inpTxt1.valueAsNumber + inpTxt2.valueAsNumber;
-    console.log(`${inpTxt1.valueAsNumber}\n${inpTxt2.valueAsNumber}`);
-    console.log(param);
+function sum(a, b){
+        result =  a + b;
+        console.log(`First value: ${a} typeof(${typeof a})\nSecond value: ${b} typeof(${typeof b})\nResult: ${result} typeof(${typeof result})`);
 }
 
-function subtraction(param){
-    param =  inpTxt1.valueAsNumber - inpTxt2.valueAsNumber;
-    console.log(`${inpTxt1.valueAsNumber}\n${inpTxt2.valueAsNumber}`);
-    console.log(param);
+function subtraction(a, b){
+    result =  a - b;
+    console.log(`First value: ${a} typeof(${typeof a})\nSecond value: ${b} typeof(${typeof b})\nResult: ${result} typeof(${typeof result})`);
 }
 
-function multi(param){
-    param =  inpTxt1.valueAsNumber*inpTxt2.valueAsNumber;
-    console.log(`${inpTxt1.valueAsNumber}\n${inpTxt2.valueAsNumber}`);
-    console.log(param);
+function multi(a, b){
+    result =  a * b;
+    console.log(`First value: ${a} typeof(${typeof a})\nSecond value: ${b} typeof(${typeof b})\nResult: ${result} typeof(${typeof result})`);
 }
 
-function division(param){
-    param =  inpTxt1.valueAsNumber/inpTxt2.valueAsNumber;
-    console.log(`${inpTxt1.valueAsNumber}\n${inpTxt2.valueAsNumber}`);
-    console.log(param);
+function division(a, b){
+    result =  a /b;
+    console.log(`First value: ${a} typeof(${typeof a})\nSecond value: ${b} typeof(${typeof b})\nResult: ${result} typeof(${typeof result})`);
 }
 
-function factorial(param){
-    if(result === 0){
-        param = inpTxt1.valueAsNumber;
-        result = 1;
+function factorial(a){
+    if(result === 0) {
+        naturalNum = a
+        result++;
     }
-    if(param === 0){
-        console.log(`${inpTxt1.valueAsNumber}\n${result}`);
-        result = 0;
-    } else{
-        result *= param;
-        factorial(--param);
+    if(a === 0) console.log(`First value: ${naturalNum} typeof(${typeof naturalNum})\nResult: ${result} typeof(${typeof result})`);
+    else{
+        result *= a;
+        factorial(--a);
     }
 }
