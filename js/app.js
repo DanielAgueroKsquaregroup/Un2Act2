@@ -10,36 +10,41 @@ let naturalNum;
 
 actBtn1.addEventListener('click', () =>{
     try {
-        if(inpTxt1.value === "" || inpTxt2.value === "" || inpTxt1.value === "" && inpTxt2.value === "") throw 'Valor(es) vacio(s)';
+        if(inpTxt1.value === "" || inpTxt2.value === "" || inpTxt1.value === "" && inpTxt2.value === "") throw 'Empty value(s)';
         sum(inpTxt1.valueAsNumber, inpTxt2.valueAsNumber);
     } catch (e) { console.log(e); }
 });
 actBtn2.addEventListener('click', () => {
     try {
-        if(inpTxt1.value === "" || inpTxt2.value === "" || inpTxt1.value === "" && inpTxt2.value === "") throw 'Valor(es) vacio(s)';
+        if(inpTxt1.value === "" || inpTxt2.value === "" || inpTxt1.value === "" && inpTxt2.value === "") throw 'Empty value(s)';
         subtraction(inpTxt1.valueAsNumber, inpTxt2.valueAsNumber);
     } catch (e) { console.log(e); }
 });
 actBtn3.addEventListener('click', () => {
     try {
-        if(inpTxt1.value === "" || inpTxt2.value === "" || inpTxt1.value === "" && inpTxt2.value === "") throw 'Valor(es) vacio(s)';
+        if(inpTxt1.value === "" || inpTxt2.value === "" || inpTxt1.value === "" && inpTxt2.value === "") throw 'Empty value(s)';
         multi(inpTxt1.valueAsNumber, inpTxt2.valueAsNumber);
     } catch (e) { console.log(e); }
 });
 actBtn4.addEventListener('click', () =>{
     try {
-        if(inpTxt1.value === "" || inpTxt2.value === "" || inpTxt1.value === "" && inpTxt2.value === "") throw 'Valor(es) vacio(s)';
-        if(inpTxt2.valueAsNumber === 0) throw `You can't divide /0`;
+        if(inpTxt1.value === "" || inpTxt2.value === "" || inpTxt1.value === "" && inpTxt2.value === "") throw 'Empty value(s)';
+        if(inpTxt2.valueAsNumber === 0) {
+            throw `First value: ${inpTxt1.valueAsNumber} typeof: ${typeof inpTxt1.valueAsNumber}\nSecond number: ${inpTxt2.valueAsNumber} typeof(${inpTxt2.valueAsNumber})\nYou can't divide /0`;
+        }
         division(inpTxt1.valueAsNumber, inpTxt2.valueAsNumber);
     } catch (e) { console.log(e); }
 });
 actBtn5.addEventListener('click', () =>{
     try {
-        if(inpTxt1.value === "") throw 'Valor vacio';
-        if(inpTxt1.valueAsNumber >= 22) throw `I can't show an appropiate result, it's very big`;
-        if(inpTxt1.valueAsNumber < 0) throw `undefined`;
+        result = 0;
+        if(inpTxt1.value === '') throw 'Empty value';
+        if(inpTxt1.valueAsNumber < 0) throw `Natural number: ${inpTxt1.valueAsNumber}\nIt is undefined`;
         factorial(inpTxt1.valueAsNumber);
-    } catch (e) { console.log(e); }
+    } catch (e) { 
+        if(result === Infinity || inpTxt1.valueAsNumber >= 1000) return console.log(e.message);
+        console.log(e);
+     }
 });
 
 function sum(a, b){
@@ -67,7 +72,11 @@ function factorial(a){
         naturalNum = a
         result++;
     }
-    if(a === 0) console.log(`First value: ${naturalNum} typeof(${typeof naturalNum})\nResult: ${result} typeof(${typeof result})`);
+    if(a === 0) {
+        if(result === Infinity || inpTxt1.valueAsNumber >= 1000) throw new RangeError(`I can't show an appropiate result, it's very big`);
+
+        console.log(`First value: ${naturalNum} typeof(${typeof naturalNum})\nResult: ${result} typeof(${typeof result})`);
+    }
     else{
         result *= a;
         factorial(--a);
